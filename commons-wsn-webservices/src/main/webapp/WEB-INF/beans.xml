@@ -9,6 +9,7 @@ http://cxf.apache.org/jaxws http://cxf.apache.org/schemas/jaxws.xsd">
 	<import resource="classpath:META-INF/cxf/cxf-extension-soap.xml" />
 	<import resource="classpath:META-INF/cxf/cxf-servlet.xml" />
 
+<!--
 	<jaxws:endpoint id="consumer"
 		implementor="org.petalslink.wsn.webservices.service.jaxws.NotificationConsumerService"
 		address="/NotificationConsumerService" />
@@ -16,12 +17,12 @@ http://cxf.apache.org/jaxws http://cxf.apache.org/schemas/jaxws.xsd">
 	<jaxws:endpoint id="producer"
 		implementor="org.petalslink.wsn.webservices.service.jaxws.NotificationProducerService"
 		address="/NotificationProducerService" />
-
+-->
 	<jaxws:endpoint id="domconsumer"
 		implementor="org.petalslink.wsn.webservices.service.dom.NotificationConsumerService"
-		address="/dom/NotificationConsumerService" />
+		address="/services/NotificationConsumerService" />
 
 	<jaxws:endpoint id="domproducer"
 		implementor="org.petalslink.wsn.webservices.service.dom.NotificationProducerService"
-		address="/dom/NotificationProducerService" />
+		address="/services/NotificationProducerService" />
 </beans>
