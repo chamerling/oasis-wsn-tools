@@ -1,0 +1,48 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jxb:bindings version="1.0" xmlns:jxb="http://java.sun.com/xml/ns/jaxb"
+	xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xjc="http://java.sun.com/xml/ns/jaxb/xjc"
+	jxb:extensionBindingPrefixes="xjc">
+
+	<!-- CAUTION : generateIsSetMethod set to true is mandatory for easybox
+		! -->
+	<jxb:globalBindings generateElementClass="false"
+		generateIsSetMethod="true">
+		<xjc:superClass name="com.ebmwebsourcing.easybox.impl.AbstractJaxbModelObject" />
+	</jxb:globalBindings> 
+	
+	<jxb:bindings schemaLocation="eventservice/standard/wsrf/bf-2.xsd"
+    	node="/xs:schema">
+    	<jxb:schemaBindings>
+      		<jxb:package name="com.ebmwebsourcing.wsstar.jaxb.resource.basefaults" />
+    	</jxb:schemaBindings>
+  	</jxb:bindings>
+  	
+  	<jxb:bindings schemaLocation="eventservice/standard/wsn/b-2.xsd"
+		node="/xs:schema">
+		<jxb:schemaBindings>
+			<jxb:package name="com.ebmwebsourcing.wsstar.jaxb.notification.base" />
+		</jxb:schemaBindings>
+	</jxb:bindings>
+
+	<jxb:bindings schemaLocation="eventservice/standard/wsrf/r-2.xsd"
+    	node="/xs:schema">
+    	<jxb:schemaBindings>
+      		<jxb:package name="com.ebmwebsourcing.wsstar.jaxb.resource.resource" />
+    	</jxb:schemaBindings>
+  	</jxb:bindings>
+  	
+  	<jxb:bindings schemaLocation="eventservice/standard/wsrf/rp-2.xsd"
+		node="/xs:schema">
+		<jxb:schemaBindings>
+			<jxb:package name="com.ebmwebsourcing.wsstar.jaxb.resource.resourceproperties" />
+		</jxb:schemaBindings>
+	</jxb:bindings>
+	
+	<jxb:bindings schemaLocation="eventservice/standard/wsn/t-1.xsd"
+		node="/xs:schema">
+		<jxb:schemaBindings>
+			<jxb:package name="com.ebmwebsourcing.wsstar.jaxb.notification.topics" />
+		</jxb:schemaBindings>
+	</jxb:bindings>
+
+</jxb:bindings>

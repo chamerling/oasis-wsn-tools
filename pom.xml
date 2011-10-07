@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+	PETALS: PETALS Services Platform
+	Copyright (C) 2010  EBM WebSourcing
+
+	This library is free software; you can redistribute it and/or
+	modify it under the terms of the GNU Lesser General Public
+	License as published by the Free Software Foundation; either
+	version 2.1 of the License, or any later version.
+
+	This library is distributed in the hope that it will be useful,
+	but WITHOUT ANY WARRANTY; without even the implied warranty of
+	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+	Lesser General Public License for more details.
+
+	You should have received a copy of the GNU Lesser General Public
+	License along with this library; if not, write to the Free Software
+	Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307
+	USA.
+
+	Initial developer(s): EBM WebSourcing
+--><project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	
+	<!--
+	<parent>
+		<groupId>org.ow2.petals</groupId>
+		<artifactId>petals-parent</artifactId>
+		<version>17</version>
+	</parent>
+	-->
+	
+	<name>Petals WSN Builder</name>
+	<artifactId>petals-wsn-builder</artifactId>
+	<groupId>org.petalslink.wsn</groupId>
+	<version>SNAPSHOT</version>
+	<packaging>pom</packaging>
+
+	<modules>
+    <module>commons-wsn-api</module>
+    <module>commons-wsn-webservices</module>
+  </modules>
+	
+	<build>
+		<defaultGoal>install</defaultGoal>
+	</build>
+	<distributionManagement>
+	 <repository>
+	      <uniqueVersion>false</uniqueVersion>
+	      <id>petalslink-public.release</id>
+	      <name>PetalsLink Maven 2 Releases Public Repository</name>
+	      <url>http://maven.petalslink.com/public</url>
+	      <layout>default</layout>
+	    </repository>
+	    <snapshotRepository>
+	      <uniqueVersion>true</uniqueVersion>
+	      <id>petalslink-public.snapshot</id>
+	      <name>PetalsLink Maven 2 Snapshots Public Repository</name>
+	      <url>http://maven.petalslink.com/public-snapshot</url>
+	      <layout>default</layout>
+	    </snapshotRepository>
+		<site>
+			<id>labs.site.deployments</id>
+			<name>Labs Site deployments</name>
+			<url>scp://labs.petalslink.org:/home/www/labs/commons/wsn/sites/${project.version}/</url>
+		</site>
+	</distributionManagement>
+</project>

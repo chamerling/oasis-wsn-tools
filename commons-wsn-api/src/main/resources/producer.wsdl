@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions name="NotificationProducerService"
+	targetNamespace="http://www.petalslink.com/wsn/service/WsnProducer"
+	xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+	xmlns:tns="http://www.petalslink.com/wsn/service/WsnProducer"
+	xmlns:event="http://www.petalslink.com/wsn/service/WsnProducer"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/">
+
+	<wsdl:import location="./api/eventservice/wsn-producer.wsdl"
+		namespace="http://www.petalslink.com/wsn/service/WsnProducer" />
+
+	<wsdl:service name="NotificationProducerService">
+		<wsdl:port binding="event:NotificationProducerSoapBinding" name="NotificationProducerServicePort">
+			<soap:address
+				location="http://localhost:9090/NotificationProducerService" />
+		</wsdl:port>
+	</wsdl:service>
+	
+</wsdl:definitions>

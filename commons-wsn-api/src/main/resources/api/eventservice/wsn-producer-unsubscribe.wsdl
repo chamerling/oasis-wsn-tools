@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+	xmlns:tns="http://www.petalslink.com/wsn/service/WsnProducerUnsubscribe"
+	xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	xmlns:wsn-bw="http://docs.oasis-open.org/wsn/bw-2" xmlns:wstop="http://docs.oasis-open.org/wsn/t-1"
+	xmlns:wsn-b="http://docs.oasis-open.org/wsn/b-2" xmlns:wsaw="http://www.w3.org/2006/02/addressing/wsdl"
+
+	xmlns:wsrf-rlw="http://docs.oasis-open.org/wsrf/rlw-2" xmlns:wsrf-rp="http://docs.oasis-open.org/wsrf/rp-2"
+	xmlns:wsrf-rpw="http://docs.oasis-open.org/wsrf/rpw-2" xmlns:wsrf-rw="http://docs.oasis-open.org/wsrf/rw-2"
+	name="WsnProducer" targetNamespace="http://www.petalslink.com/wsn/service/WsnProducerUnsubscribe">
+
+	<!-- ================================================== -->
+	<!-- ================== imports ======================= -->
+	<!-- ================================================== -->
+	<!-- WS-BaseNotification wsdl -->
+	<wsdl:import location="./standard/wsn/bw-2.wsdl" namespace="http://docs.oasis-open.org/wsn/bw-2" />
+
+	<!-- WS-Resource wsdls' set -->
+	<wsdl:import location="./standard/wsrf/rw-2.wsdl"
+		namespace="http://docs.oasis-open.org/wsrf/rw-2" />
+	<wsdl:import location="./standard/wsrf/rpw-2.wsdl"
+		namespace="http://docs.oasis-open.org/wsrf/rpw-2" />
+
+
+	<!-- ====================================== -->
+	<!-- ========= Types Definitions ========== -->
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+
+	<wsdl:types>
+		<xsd:schema targetNamespace="http://www.petalslink.com/wsn/service/WsnProducerUnsubscribe">
+			<xsd:import namespace="http://docs.oasis-open.org/wsn/b-2"
+				schemaLocation="./standard/wsn/b-2.xsd" />
+			<xsd:import namespace="http://www.w3.org/2005/08/addressing"
+				schemaLocation="./standard/wsaddr/ws-addr.xsd" />
+		</xsd:schema>
+	</wsdl:types>
+
+	<!-- ================================================== -->
+	<!-- ========= Message part definition ================ -->
+	<!-- ================================================== -->
+
+	<!-- =============================================== -->
+	<!-- ========= PortType definition ================ -->
+	<!-- =============================================== -->
+
+	<!-- ====== PausableSubscriptionManager PortType Definition ======= -->
+	<wsdl:portType name="PausableSubscriptionManager"
+		wsrf-rp:ResourceProperties="wsn-b:SubscriptionManagerRP">
+		<!-- ============== Extends: wsn-bw:SubscriptionManager portType============ -->
+		<!-- == SubscriptionManager specific operations == -->
+		<wsdl:operation name="Renew">
+			<wsdl:input name="RenewRequest" message="wsn-bw:RenewRequest"
+				wsaw:Action="http://docs.oasis-open.org/wsn/bw-2/SubscriptionManager/RenewRequest" />
+			<wsdl:output name="RenewResponse" message="wsn-bw:RenewResponse"
+				wsaw:Action="http://docs.oasis-open.org/wsn/bw-2/SubscriptionManager/RenewResponse" />
+			<wsdl:fault name="ResourceUnknownFault" message="wsrf-rw:ResourceUnknownFault"
+				wsaw:Action="http://docs.oasis-open.org/wsrf/fault" />
+			<wsdl:fault name="UnacceptableTerminationTimeFault"
+				message="wsn-bw:UnacceptableTerminationTimeFault" wsaw:Action="http://docs.oasis-open.org/wsrf/fault" />
+		</wsdl:operation>
+
+		<wsdl:operation name="Unsubscribe">
+			<wsdl:input name="UnsubscribeRequest" message="wsn-bw:UnsubscribeRequest"
+				wsaw:Action="http://docs.oasis-open.org/wsn/bw-2/SubscriptionManager/UnsubscribeRequest" />
+			<wsdl:output name="UnsubscribeResponse" message="wsn-bw:UnsubscribeResponse"
+				wsaw:Action="http://docs.oasis-open.org/wsn/bw-2/SubscriptionManager/UnsubscribeResponse" />
+			<wsdl:fault name="ResourceUnknownFault" message="wsrf-rw:ResourceUnknownFault"
+				wsaw:Action="http://docs.oasis-open.org/wsrf/fault" />
+			<wsdl:fault name="UnableToDestroySubscriptionFault"
+				message="wsn-bw:UnableToDestroySubscriptionFault" wsaw:Action="http://docs.oasis-open.org/wsrf/fault" />
+		</wsdl:operation>
+
+		<!-- == WS-ResourceProperties specific operations == -->
+		<wsdl:operation name="GetResourceProperty">
+			<wsdl:input message="wsrf-rpw:GetResourcePropertyRequest"
+				name="GetResourcePropertyRequest"
+				wsaw:Action="http://docs.oasis-open.org/wsrf/rpw-2/GetResourceProperty/GetResourcePropertyRequest" />
+			<wsdl:output message="wsrf-rpw:GetResourcePropertyResponse"
+				name="GetResourcePropertyResponse"
+				wsaw:Action="http://docs.oasis-open.org/wsrf/rpw-2/GetResourceProperty/GetResourcePropertyResponse" />
+			<wsdl:fault message="wsrf-rpw:InvalidResourcePropertyQNameFault"
+				name="InvalidResourcePropertyQNameFault" wsaw:Action="http://docs.oasis-open.org/wsrf/fault" />
+			<wsdl:fault message="wsrf-rw:ResourceUnknownFault" name="ResourceUnknownFault"
+				wsaw:Action="http://docs.oasis-open.org/wsrf/fault" />
+			<wsdl:fault message="wsrf-rw:ResourceUnavailableFault"
+				name="ResourceUnavailableFault" wsaw:Action="http://docs.oasis-open.org/wsrf/fault" />
+		</wsdl:operation>
+
+	</wsdl:portType>
+
+
+	<!-- SubscriptionManager binding definition -->
+	<wsdl:binding name="PausableSubscriptionManagerSoapBinding"
+		type="tns:PausableSubscriptionManager">
+
+		<soap:binding style="document"
+			transport="http://schemas.xmlsoap.org/soap/http" />
+		<wsdl:operation name="Renew">
+			<soap:operation
+				soapAction="http://www.petalslink.com/wsn/service/WsnProducerUnsubscribe/Renew" />
+			<wsdl:input name="RenewRequest">
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output name="RenewResponse">
+				<soap:body use="literal" />
+			</wsdl:output>
+			<wsdl:fault name="ResourceUnknownFault">
+				<soap:fault use="literal" name="ResourceUnknownFault" />
+			</wsdl:fault>
+			<wsdl:fault name="UnacceptableTerminationTimeFault">
+				<soap:fault use="literal"
+					name="UnacceptableTerminationTimeFault" />
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="Unsubscribe">
+			<soap:operation
+				soapAction="http://www.petalslink.com/wsn/service/WsnProducerUnsubscribe/Unsubscribe" />
+			<wsdl:input name="UnsubscribeRequest">
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output name="UnsubscribeResponse">
+				<soap:body use="literal" />
+			</wsdl:output>
+			<wsdl:fault name="ResourceUnknownFault">
+				<soap:fault use="literal" name="ResourceUnknownFault" />
+			</wsdl:fault>
+			<wsdl:fault name="UnableToDestroySubscriptionFault">
+				<soap:fault use="literal"
+					name="UnableToDestroySubscriptionFault" />
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="GetResourceProperty">
+			<soap:operation
+				soapAction="http://www.petalslink.com/wsn/service/WsnProducerUnsubscribe/GetResourceProperty" />
+			<wsdl:input name="GetResourcePropertyRequest">
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output name="GetResourcePropertyResponse">
+				<soap:body use="literal" />
+			</wsdl:output>
+			<wsdl:fault name="InvalidResourcePropertyQNameFault">
+				<soap:fault use="literal"
+					name="InvalidResourcePropertyQNameFault" />
+			</wsdl:fault>
+			<wsdl:fault name="ResourceUnknownFault">
+				<soap:fault use="literal" name="ResourceUnknownFault" />
+			</wsdl:fault>
+			<wsdl:fault name="ResourceUnavailableFault">
+				<soap:fault use="literal"
+					name="ResourceUnavailableFault" />
+			</wsdl:fault>
+		</wsdl:operation>
+	</wsdl:binding>
+
+
+</wsdl:definitions>

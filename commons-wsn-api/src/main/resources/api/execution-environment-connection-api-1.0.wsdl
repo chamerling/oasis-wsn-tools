@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions name="ExecutionEnvironmentManagerService"
+	targetNamespace="http://www.petalslink.com/easyresources/execution.environment.connection.api/1.0"
+	xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+	xmlns:env="http://www.petalslink.com/easyresources/execution-environment-connection-model"
+	xmlns:tns="http://www.petalslink.com/easyresources/execution.environment.connection.api/1.0"
+	xmlns:event="http://www.petalslink.com/wsn/service/WsnProducer"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/">
+
+	<wsdl:import location="./eventservice/wsn-producer.wsdl"
+		namespace="http://www.petalslink.com/wsn/service/WsnProducer" />
+
+	<wsdl:types>
+		<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+			xmlns:tns="http://www.petalslink.com/easyresources/execution.environment.connection.api/1.0"
+			targetNamespace="http://www.petalslink.com/easyresources/execution.environment.connection.api/1.0"
+			elementFormDefault="qualified" version="1.0">
+
+			<xsd:import
+				namespace="http://www.petalslink.com/easyresources/execution-environment-connection-model"
+				schemaLocation="execution-environment-connection-model.xsd"></xsd:import>
+
+
+			<xs:element name="getResourceIdentifiers">
+				<xs:complexType>
+				</xs:complexType>
+			</xs:element>
+
+			<xs:element name="getResourceIdentifiersResponse">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element ref="env:resourceIdentifier" maxOccurs="unbounded"
+							minOccurs="0"></xs:element>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+
+			<xs:element name="getContent">
+				<xs:complexType>
+					<xsd:sequence>
+						<xs:element ref="env:resourceIdentifier" maxOccurs="1"
+							minOccurs="1"></xs:element>
+					</xsd:sequence>
+				</xs:complexType>
+			</xs:element>
+
+			<xs:element name="getContentResponse">
+				<xs:complexType>
+					<xsd:sequence>
+						<xs:any />
+					</xsd:sequence>
+				</xs:complexType>
+			</xs:element>
+
+			<xs:element name="getContentFault">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="message" type="xs:string" />
+						<xs:element name="stacktrace" type="xs:string" />
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+
+			<xs:element name="getExecutionEnvironmentInformation">
+				<xs:complexType>
+				</xs:complexType>
+			</xs:element>
+
+			<xs:element name="getExecutionEnvironmentInformationResponse">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="executionEnvironmentInformation"
+							type="env:ExecutionEnvironmentInformationType" minOccurs="1"
+							maxOccurs="1" nillable="false" />
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+
+			<xs:element name="getExecutionEnvironmentInformationFault">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="message" type="xs:string" />
+						<xs:element name="stacktrace" type="xs:string" />
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="getResourceIdentifiersFault">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="message" type="xs:string" />
+						<xs:element name="stacktrace" type="xs:string" />
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+            <xs:element name="getAdditionalContent">
+				<xs:complexType>
+					<xsd:sequence>
+						<xs:element ref="env:resourceIdentifier" maxOccurs="1"
+							minOccurs="1"></xs:element>
+						<xs:element name="id" type="xs:string" ></xs:element>
+					</xsd:sequence>
+				</xs:complexType>
+			</xs:element>
+            <xs:element name="getAdditionalContentResponse">
+            	<xs:complexType>
+            		<xsd:sequence>
+						<xs:any />
+					</xsd:sequence>
+            	</xs:complexType>
+            </xs:element>
+            <xs:element name="getAdditionalContentFault">
+            	<xs:complexType>
+            		<xs:sequence>
+            			<xs:element name="message"	type="xs:string">
+            			</xs:element>
+            			<xs:element name="stacktrace" type="xs:string" />
+            		</xs:sequence>
+            	</xs:complexType>
+            </xs:element>
+		</xs:schema>
+	</wsdl:types>
+
+	<wsdl:message name="getResourceIdentifiers">
+		<wsdl:part name="parameters" element="tns:getResourceIdentifiers">
+		</wsdl:part>
+	</wsdl:message>
+
+	<wsdl:message name="getResourceIdentifiersResponse">
+		<wsdl:part name="parameters" element="tns:getResourceIdentifiersResponse">
+		</wsdl:part>
+	</wsdl:message>
+
+	<wsdl:message name="getContent">
+		<wsdl:part name="parameters" element="tns:getContent">
+		</wsdl:part>
+	</wsdl:message>
+
+	<wsdl:message name="getContentResponse">
+		<wsdl:part name="parameters" element="tns:getContentResponse">
+		</wsdl:part>
+	</wsdl:message>
+
+	<wsdl:message name="getContentFault">
+		<wsdl:part name="parameters" element="tns:getContentFault"></wsdl:part>
+	</wsdl:message>
+
+	<wsdl:message name="getExecutionEnvironmentInformation">
+		<wsdl:part name="parameters" element="tns:getExecutionEnvironmentInformation">
+		</wsdl:part>
+	</wsdl:message>
+
+	<wsdl:message name="getExecutionEnvironmentInformationResponse">
+		<wsdl:part name="parameters"
+			element="tns:getExecutionEnvironmentInformationResponse">
+		</wsdl:part>
+	</wsdl:message>
+
+	<wsdl:message name="getExecutionEnvironmentInformationFault">
+		<wsdl:part name="fault"
+			element="tns:getExecutionEnvironmentInformationFault"></wsdl:part>
+	</wsdl:message>
+
+	<wsdl:message name="getResourceIdentifiersFault">
+		<wsdl:part name="fault" element="tns:getResourceIdentifiersFault"></wsdl:part>
+	</wsdl:message>
+
+
+	<!-- For Event -->
+	<wsdl:message name="resourceIdentifierEvent">
+		<wsdl:part name="parameters" element="env:resourceIdentifier"></wsdl:part>
+	</wsdl:message>
+
+	<wsdl:message name="getAdditionalContentRequest">
+		<wsdl:part name="getAdditionalContentRequest" element="tns:getAdditionalContent"></wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="getAdditionalContentResponse">
+		<wsdl:part name="parameters" element="tns:getAdditionalContentResponse"></wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="getAdditionalContentFault">
+		<wsdl:part name="parameters" element="tns:getAdditionalContentFault"></wsdl:part>
+	</wsdl:message>
+	<wsdl:portType name="ExecutionEnvironmentManager">
+
+		<wsdl:operation name="getResourceIdentifiers">
+			<wsdl:input name="getResourceIdentifiers" message="tns:getResourceIdentifiers">
+			</wsdl:input>
+			<wsdl:output name="getEndpointsResponse" message="tns:getResourceIdentifiersResponse">
+			</wsdl:output>
+			<wsdl:fault name="fault" message="tns:getResourceIdentifiersFault"></wsdl:fault>
+		</wsdl:operation>		<wsdl:operation name="getContent">
+			<wsdl:input name="getContent" message="tns:getContent">
+			</wsdl:input>
+			<wsdl:output name="getDescriptionResponse" message="tns:getContentResponse">
+			</wsdl:output>
+			<wsdl:fault name="fault" message="tns:getContentFault"></wsdl:fault>
+		</wsdl:operation>
+
+		<wsdl:operation name="getExecutionEnvironmentInformation">
+			<wsdl:input name="getExecutionEnvironmentInformation"
+				message="tns:getExecutionEnvironmentInformation">
+			</wsdl:input>
+			<wsdl:output name="getExecutionEnvironmentInformationResponse"
+				message="tns:getExecutionEnvironmentInformationResponse">
+			</wsdl:output>
+			<wsdl:fault name="fault"
+				message="tns:getExecutionEnvironmentInformationFault"></wsdl:fault>
+		</wsdl:operation>
+
+		<wsdl:operation name="getAdditionalContent">
+			<wsdl:input message="tns:getAdditionalContentRequest"></wsdl:input>
+			<wsdl:output message="tns:getAdditionalContentResponse"></wsdl:output>
+            <wsdl:fault name="fault" message="tns:getAdditionalContentFault"></wsdl:fault>
+        </wsdl:operation>
+	</wsdl:portType>
+</wsdl:definitions>

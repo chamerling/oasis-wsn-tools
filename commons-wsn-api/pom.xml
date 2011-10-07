@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
+	xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<artifactId>petals-parent</artifactId>
+		<groupId>org.ow2.petals</groupId>
+		<version>17</version>
+	</parent>
+	<groupId>org.petalslink.research.commons</groupId>
+	<artifactId>commons-wsn-api</artifactId>
+	<version>1.0-SNAPSHOT</version>
+	<name>commons-wsn-api</name>
+	<dependencies>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>3.8.1</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.petalslink.dsb</groupId>
+			<artifactId>dsb-cxfutils</artifactId>
+			<version>1.0-SNAPSHOT</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.petalslink.dsb</groupId>
+			<artifactId>dsb-saajutils</artifactId>
+			<version>1.0-SNAPSHOT</version>
+			<scope>test</scope>
+		</dependency>
+	</dependencies>
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+	</properties>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.cxf</groupId>
+				<artifactId>cxf-codegen-plugin</artifactId>
+				<version>2.4.0-easy</version>
+				<executions>
+					<execution>
+						<id>generate-sources</id>
+						<phase>generate-sources</phase>
+						<configuration>
+							<wsdlOptions>
+								<wsdlOption>
+									<wsdl>${basedir}/src/main/resources/producer.wsdl</wsdl>
+									<extraargs>
+										<extraarg>-impl</extraarg>
+									</extraargs>
+								</wsdlOption>
+								<wsdlOption>
+									<wsdl>${basedir}/src/main/resources/consumer.wsdl</wsdl>
+									<extraargs>
+										<extraarg>-impl</extraarg>
+										<extraarg>-client</extraarg>
+										<extraarg>-server</extraarg>
+									</extraargs>
+								</wsdlOption>
+							</wsdlOptions>
+						</configuration>
+						<goals>
+							<goal>wsdl2java</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			<!-- FIXME: Add cxf catalog to avoid to duplicate class -->
+			<plugin>
+				<artifactId>maven-antrun-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>delete-duplicate-classes</id>
+						<phase>process-resources</phase>
+						<goals>
+							<goal>run</goal>
+						</goals>
+						<configuration>
+							<tasks>
+								<echo message="delete duplicate classes" />
+								<delete
+									dir="./target/generated-sources/cxf/easybox/easyesb/petalslink/com/soa" />
+								<delete dir="./target/classes/easybox/easyesb/petalslink/com/soa" />
+								<delete
+									dir="./target/generated-sources/cxf/com/ebmwebsourcing/wsstar/jaxb" />
+								<delete dir="./target/classes/com/ebmwebsourcing/wsstar/jaxb" />
+							</tasks>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+	</build>
+
+	<distributionManagement>
+		<repository>
+			<uniqueVersion>false</uniqueVersion>
+			<id>petalslink-public.release</id>
+			<name>PetalsLink Maven 2 Releases Public Repository</name>
+			<url>http://maven.petalslink.com/public</url>
+			<layout>default</layout>
+		</repository>
+		<snapshotRepository>
+			<uniqueVersion>true</uniqueVersion>
+			<id>petalslink-public.snapshot</id>
+			<name>PetalsLink Maven 2 Snapshots Public Repository</name>
+			<url>http://maven.petalslink.com/public-snapshot</url>
+			<layout>default</layout>
+		</snapshotRepository>
+		<site>
+			<id>labs.site.deployments</id>
+			<name>Labs Site deployments</name>
+			<url>scp://labs.petalslink.org:/home/www/labs/commons/dsb/sites/${project.version}/</url>
+		</site>
+	</distributionManagement>
+
+</project>

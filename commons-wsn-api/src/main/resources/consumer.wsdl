@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions name="NotificationConsumerService"
+	targetNamespace="http://www.petalslink.com/wsn/service/WsnConsumer"
+	xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+	xmlns:tns="http://www.petalslink.com/wsn/service/WsnConsumer"
+	xmlns:event="http://www.petalslink.com/wsn/service/WsnConsumer"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/">
+
+	<wsdl:import location="./api/eventservice/wsn-consumer.wsdl"
+		namespace="http://www.petalslink.com/wsn/service/WsnConsumer" />
+
+	<wsdl:service name="NotificationConsumerService"> 
+	    <wsdl:port binding="event:NotificationConsumerSOAPBinding" name="NotificationConsumerServicePort"> 
+	        <soap:address
+				location="http://localhost:8889/NotificationConsumerService"/> 
+	    </wsdl:port>
+    </wsdl:service>
+	
+</wsdl:definitions>

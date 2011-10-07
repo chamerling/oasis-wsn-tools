@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+	xmlns:tns="http://www.petalslink.com/wsn/service/WsnConsumer"
+	xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	xmlns:wsn-bw="http://docs.oasis-open.org/wsn/bw-2" xmlns:wstop="http://docs.oasis-open.org/wsn/t-1"
+	xmlns:wsn-b="http://docs.oasis-open.org/wsn/b-2" name="WsnConsumer"
+	targetNamespace="http://www.petalslink.com/wsn/service/WsnConsumer">
+
+	<!-- ================================================== -->
+	<!-- ================== imports ======================= -->
+	<!-- ================================================== -->
+	<wsdl:import location="./standard/wsn/bw-2.wsdl"
+		namespace="http://docs.oasis-open.org/wsn/bw-2" />
+
+	<wsdl:types>
+		<xsd:schema targetNamespace="http://www.petalslink.com/wsn/service/WsnProducer">
+			<xsd:import namespace="http://docs.oasis-open.org/wsn/b-2"
+				schemaLocation="./standard/wsn/b-2.xsd" />
+		</xsd:schema>
+	</wsdl:types>
+
+	<!-- ================================================== -->
+	<!-- ========= Message part definition ================ -->
+	<!-- ================================================== -->
+
+	<!-- == Imported from bw-2.wsdl -->
+
+	<!-- =============================================== -->
+	<!-- ========= PortType definition ================ -->
+	<!-- =============================================== -->
+
+	<!-- == Imported from bw-2.wsdl -->
+
+	<!-- ============================================= -->
+	<!-- ========== Binding definition =============== -->
+	<!-- ============================================= -->
+	<!-- NotificationConsumer binding definition -->
+	<wsdl:binding name="NotificationConsumerSOAPBinding" type="wsn-bw:NotificationConsumer">
+		<soap:binding style="document"
+			transport="http://schemas.xmlsoap.org/soap/http" />
+		<wsdl:operation name="Notify">
+			<soap:operation
+				soapAction="http://www.petalslink.com/wsn/service/WsnConsumer/Notify" />
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+		</wsdl:operation>
+	</wsdl:binding>
+
+
+</wsdl:definitions>

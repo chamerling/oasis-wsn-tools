@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema"
+	targetNamespace="http://www.petalslink.com/easyresources/execution-environment-connection-model"
+	xmlns:tns="http://www.petalslink.com/easyresources/execution-environment-connection-model"
+	elementFormDefault="qualified">
+
+	<element name="resourceIdentifier">
+		<complexType>
+			<sequence>
+				<element name="id" type="string">
+				</element>
+				<element name="resourceType" type="string">
+				</element>
+			</sequence>
+		</complexType>
+	</element>
+
+	<complexType name="InterfaceConnector">
+		<sequence>
+			<element name="id" type="string" minOccurs="0" nillable="true"></element>
+			<element name="interfaceName" type="QName"></element>
+			<element name="endpointAddress" type="string"></element>
+		</sequence>
+	</complexType>
+
+	<complexType name="ExecutionEnvironmentInformationType">
+		<sequence>
+			<element name="name" type="string"></element>
+			<element name="type" type="tns:ExecutionEnvironmentInformationTypeType"></element>
+			<element name="version" type="string"></element>
+			<element name="interfaceConnector" type="tns:InterfaceConnector"
+				minOccurs="0" maxOccurs="unbounded"></element>
+		</sequence>
+	</complexType>
+
+	<simpleType name="ExecutionEnvironmentInformationTypeType">
+		<restriction base="string">
+			<enumeration value="ESB"></enumeration>
+			<enumeration value="APPLICATION_SERVER"></enumeration>
+			<enumeration value="OTHERS"></enumeration>
+		</restriction>
+	</simpleType>
+</schema>
