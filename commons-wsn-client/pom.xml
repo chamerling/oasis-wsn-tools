@@ -9,10 +9,9 @@
 		<version>17</version>
 	</parent>
 	<groupId>org.petalslink.research.commons</groupId>
-	<artifactId>commons-wsn-webservices</artifactId>
+	<artifactId>commons-wsn-client</artifactId>
 	<version>1.0-SNAPSHOT</version>
-	<name>commons-wsn-webservices</name>
-	<packaging>war</packaging>
+	<name>commons-wsn-client</name>
 	<dependencies>
 		<dependency>
 			<groupId>junit</groupId>
@@ -20,66 +19,22 @@
 			<version>3.8.1</version>
 			<scope>test</scope>
 		</dependency>
-
 		<dependency>
-			<groupId>org.apache.cxf</groupId>
-			<artifactId>cxf-bundle-minimal</artifactId>
-			<version>2.4.0</version>
+			<groupId>org.petalslink.dsb</groupId>
+			<artifactId>dsb-notification-httpclient</artifactId>
+			<version>1.0-SNAPSHOT</version>
 		</dependency>
 
 		<dependency>
 			<groupId>org.petalslink.dsb</groupId>
-			<artifactId>dsb-saajutils</artifactId>
+			<artifactId>dsb-soap</artifactId>
 			<version>1.0-SNAPSHOT</version>
-		</dependency>
-
-		<dependency>
-			<groupId>org.petalslink.research.commons</groupId>
-			<artifactId>commons-wsn-api</artifactId>
-			<version>1.0-SNAPSHOT</version>
-			<exclusions>
-				<exclusion>
-					<artifactId>cxf-bundle-minimal</artifactId>
-					<groupId>org.apache.cxf</groupId>
-				</exclusion>
-			</exclusions>
-		</dependency>
-
-		<dependency>
-			<groupId>org.petalslink.dsb</groupId>
-			<artifactId>dsb-notification-commons</artifactId>
-			<version>1.0-SNAPSHOT</version>
-		</dependency>
-
-		<!-- WSN OASIS implementation -->
-		<dependency>
-			<artifactId>wsn-b-services-impl</artifactId>
-			<groupId>com.ebmwebsourcing.deprecated.oasis-ws-basenotification</groupId>
-			<version>1.0-SNAPSHOT</version>
-			<exclusions>
-				<exclusion>
-					<groupId>org.apache.cxf</groupId>
-					<artifactId>*</artifactId>
-				</exclusion>
-			</exclusions>
 		</dependency>
 
 	</dependencies>
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
-
-	<build>
-		<plugins>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-war-plugin</artifactId>
-				<configuration>
-					<warName>wsnservices</warName>
-				</configuration>
-			</plugin>
-		</plugins>
-	</build>
 
 	<distributionManagement>
 		<repository>

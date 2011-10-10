@@ -1,5 +1,17 @@
-/**
- * 
+/*
+ * Copyright 2011 Christophe Hamerling
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *   http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  */
 package org.petalslink.wsn.webservices.service.dom;
 
@@ -56,8 +68,8 @@ public class NotificationConsumerService implements Provider<SOAPMessage> {
         Document in = null;
         try {
             in = SOAPMessageUtils.getBodyFromMessage(request);
-        } catch (SOAPException e1) {
-            handleFault(e1);
+        } catch (SOAPException e) {
+            handleFault(e);
         }
 
         if ("Notify".equals(operation.getLocalPart())) {
@@ -68,9 +80,17 @@ public class NotificationConsumerService implements Provider<SOAPMessage> {
                 handleFault(e);
             }
         } else {
-            throw new RuntimeException("Bad operation " + operation);
+            handleFault("Bad operation " + operation);
         }
+
         // does not return anything, must be a inonly operation!
+        // the WS stack may detect the in only operation and does not care about
+        // this result (true with CXF)
+        try {
+            return SOAPMessageUtils.createSOAPMessageFromBodyContent(null);
+        } catch (SOAPException e) {
+            handleFault(e);
+        }
         return null;
     }
 
@@ -89,4 +109,11 @@ public class NotificationConsumerService implements Provider<SOAPMessage> {
         throw new RuntimeException(e);
     }
 
+    /**
+     * @param string
+     */
+    private void handleFault(String string) {
+        throw new RuntimeException(string);
+
+    }
 }

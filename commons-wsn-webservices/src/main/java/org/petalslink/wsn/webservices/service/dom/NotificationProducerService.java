@@ -1,5 +1,17 @@
-/**
- * 
+/*
+ * Copyright 2011 Christophe Hamerling
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *   http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  */
 package org.petalslink.wsn.webservices.service.dom;
 
@@ -55,6 +67,7 @@ public class NotificationProducerService implements Provider<SOAPMessage> {
      */
     public SOAPMessage invoke(SOAPMessage request) {
         Document in = null;
+        SOAPMessage result = null;
         try {
             in = SOAPMessageUtils.getBodyFromMessage(request);
         } catch (SOAPException e1) {
@@ -63,7 +76,7 @@ public class NotificationProducerService implements Provider<SOAPMessage> {
 
         QName operation = getOperation();
         if (operation == null) {
-            handleFault(new Exception("Operation is null"));
+            handleFault("Operation is null");
         }
 
         if ("Subscribe".equals(operation.getLocalPart())) {
@@ -75,7 +88,7 @@ public class NotificationProducerService implements Provider<SOAPMessage> {
                 if (res != null) {
                     Document docResp = RefinedWsnbFactory.getInstance().getWsnbWriter()
                             .writeSubscribeResponseAsDOM(res);
-                    // TODO : need to write the response...
+                    result = SOAPMessageUtils.createSOAPMessageFromBodyContent(docResp);
                 }
             } catch (Exception e) {
                 handleFault(e);
@@ -91,18 +104,16 @@ public class NotificationProducerService implements Provider<SOAPMessage> {
                 if (res != null) {
                     Document docResp = RefinedWsnbFactory.getInstance().getWsnbWriter()
                             .writeGetCurrentMessageResponseAsDOM(res);
-                    // TODO : Write out
+                    result = SOAPMessageUtils.createSOAPMessageFromBodyContent(docResp);
                 }
 
             } catch (Exception e) {
                 handleFault(e);
             }
         } else {
-            throw new RuntimeException("Bad operation " + operation);
+            handleFault("Bad operation " + operation);
         }
-
-        // TODO
-        return null;
+        return result;
     }
 
     /**
@@ -110,6 +121,10 @@ public class NotificationProducerService implements Provider<SOAPMessage> {
      */
     private void handleFault(Exception e) {
         throw new RuntimeException(e);
+    }
+
+    private void handleFault(String message) {
+        throw new RuntimeException(new Exception(message));
     }
 
     private QName getOperation() {
