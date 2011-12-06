@@ -57,4 +57,95 @@
 			<url>scp://labs.petalslink.org:/home/www/labs/commons/dsb/sites/${project.version}/</url>
 		</site>
 	</distributionManagement>
+	<repositories>
+		<repository>
+			<id>petalslink-public.release</id>
+			<name>PetalsLink Public Repository</name>
+			<url>http://maven.petalslink.com/public</url>
+			<releases>
+				<enabled>true</enabled>
+			</releases>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
+		</repository>
+		<repository>
+			<id>petalslink-public.snapshot</id>
+			<name>PetalsLink Snapshot Public Repository</name>
+			<url>http://maven.petalslink.com/public-snapshot</url>
+			<snapshots>
+				<enabled>true</enabled>
+			</snapshots>
+			<releases>
+				<enabled>false</enabled>
+			</releases>
+		</repository>
+		<repository>
+			<id>petalslink-public.others</id>
+			<url>http://maven.petalslink.com/others</url>
+			<releases>
+				<enabled>true</enabled>
+			</releases>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
+		</repository>
+		<repository>
+			<id>ow2-public.release</id>
+			<name>OW2 Public Repository</name>
+			<url>http://maven.ow2.org/maven2</url>
+			<releases>
+				<enabled>true</enabled>
+			</releases>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
+		</repository>
+		<repository>
+			<id>ow2-public.snapshot</id>
+			<name>OW2 Snapshot Repository</name>
+			<url>http://maven.ow2.org/maven2-snapshot</url>
+			<releases>
+				<enabled>false</enabled>
+			</releases>
+			<snapshots>
+				<enabled>true</enabled>
+			</snapshots>
+		</repository>
+	</repositories>
+	<pluginRepositories>
+		<pluginRepository>
+			<id>petalslink-public.snapshot.plugin</id>
+			<name>PetalsLink plugin Repository</name>
+			<url>http://maven.petalslink.com/public-snapshot</url>
+			<releases>
+				<enabled>false</enabled>
+			</releases>
+			<snapshots>
+				<enabled>true</enabled>
+			</snapshots>
+		</pluginRepository>
+		<pluginRepository>
+			<id>petalslink-public.release.plugin</id>
+			<name>PetalsLink plugin release Repository</name>
+			<url>http://maven.petalslink.com/public</url>
+			<releases>
+				<enabled>true</enabled>
+			</releases>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
+		</pluginRepository>
+		<pluginRepository>
+			<id>petalslink-public.others.plugin</id>
+			<name>PetalsLink plugin others Repository</name>
+			<url>http://maven.petalslink.com/others</url>
+			<releases>
+				<enabled>true</enabled>
+			</releases>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
+		</pluginRepository>
+	</pluginRepositories>
 </project>
