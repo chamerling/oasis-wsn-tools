@@ -37,7 +37,9 @@
 	<packaging>pom</packaging>
 
 	<modules>
+		<!--
     <module>commons-wsn-api</module>
+		-->
     <module>commons-wsn-webservices</module>
     <module>commons-wsn-client</module>
   </modules>
